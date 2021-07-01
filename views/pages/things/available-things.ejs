@@ -1,0 +1,106 @@
+<div id="available-things" v-cloak>
+  <div class="container">
+    <div class="page-header text-center">
+      <h1>Things</h1>
+      <p>View available items to borrow, or upload your own things.</p>
+      <div class="header-buttons">
+        <button class="btn btn-outline-primary" @click="clickAddButton()">Add an item</button>
+      </div>
+      <div class="listings" v-if="things.length>0 && me">
+        <div class="card" :key="'thing'+thing.id" v-for="thing in things">
+          <div class="card-options">
+            <span
+              class="options-button"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Delete"
+              v-if="me.id===thing.owner.id"
+              @click="clickDeleteThing(thing.id)"
+            >
+              <span class="fa fa-trash-o text-danger"></span>
+            </span>
+          </div>
+          <span class="label" v-if="thing.label">{{ thing.label }}<br /></span>
+          <small class="owner text-secondary" v-if="thing.owner.id===me.id">
+            <span class="fa fa-home mr-1">Mine</span></small
+          >
+           <small class="owner text-primary" v-else> {{ thing.owner.fullName }}</small>
+           <img alt="A mysterious item" :alt="thing.label ? thing.label : 'A mysterious item'" :src="thing.imageSrc"/>
+        </div>
+      </div>
+      <div class="empty text-center" v-else>
+        <p>You and your friends have not uploaded any items. Add something</p>
+      </div>
+    </div>
+  </div>
+  <modal v-if="uploadThingModalOpen" v-cloak key="upload" @close="closeUploadThingModal()">
+    <ajax-form action="uploadThing" :syncing.sync="syncing"
+    :handle-parsing="handleParsingUploadThingForm" :cloud-error.sync="cloudError"
+    @submitted="submittedUploadThingForm($event)">
+    <div class="modal-header">
+      <h3 class="modal-title">
+        Upload a New Thing
+      </h3>
+    </div>
+    <div class="modal-body">
+      <label>Add a photo:</label>
+      <div class="photo-uploader">
+        <div class="photo-upload-field row d-flex align-items-center">
+          <div class="col d-flex-column justify-content-center">
+            <input type="file" name="photo" id="photo"
+             class="file-input" :disabled="syncing" accept="image/*"
+              @change="changeFileInput($event.target.files)"
+            />
+            <p class="image-advice text-muted" v-if="!formErrors">
+              <strong>Tip</strong>: Make sure the item is front and center in the photo,
+              so people know exactly what you're offering to share.
+            </p>
+            <p class="image-advice text-danger" v-if="formErrors.photo">
+              A photo is required in order to add a new item
+            </p>
+          </div>
+        </div>
+      </div>
+      <img src="/images/things/icon_image.png" alt="Icon Image" style="max-width: 300px;float:left;">
+      <!-- <input type="button" name="photo-btn" id="photo" class="btn btn-outline-success" value="Select"/> -->
+
+      <div class="form-group">
+        <label for="label">What is it?</label>
+        <input type="text" name="label" id="label" v-model="uploadFormData.label"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button data-dismiss="modal" class="btn btn-outline-secondary mr-1">
+        Neverming
+      </button>
+      <button type="submit" class="btn btn-success ml-1">Upload</button>
+    </div>
+    </ajax-form>
+  </modal>
+  <% /** * Confirm Delete Thing Modal **/ %>
+  <modal v-if="confirmDeleteThingModalOpen && selectedThing" v-cloak key="delete"
+    @close="closeDeleteThingModal()">
+    <ajax-form action="destroyOneThing" :syncing.sync="syncing"
+      :cloud-error.sync="_clearUploadThingModal"
+      :handle-parsing="handleParsingDeleteThingForm"
+      @submitted="submittedDeleteThingForm()">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Remove this item?
+        </h5>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to remove this {{selectedThing.label || 'item' }}?</p>
+        <p>This item will no longer be available to share with friends.</p>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-outline-secondary mr-1">
+          Neverming
+        </button>
+        <button type="submit" class="btn btn-danger ml-1">Remove</button>
+      </div>
+    </ajax-form>
+  </modal>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */
+exposeLocalsToBrowser() %>
