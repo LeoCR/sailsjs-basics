@@ -81,6 +81,7 @@ parasails.registerPage('available-things', {
       this._clearUploadThingModal();
     },
     submittedUploadThingForm:async function(result){
+
       try {
         if(result&&result.id&&result.fullName){
           this.things.push({
@@ -89,12 +90,16 @@ parasails.registerPage('available-things', {
             owner:{
               id:result.id,
               fullName:result.fullName
-            }
+            },
+            imageSrc: '/api/v1/things/'+result.id
           });
+          this.$forceUpdate();
+          console.log('this.things',this.things);
         }
       } catch (error) {
         console.error('An error occurs in submittedUploadThingForm',error);
       }
+
       //Close the modal
       this._clearUploadThingModal();
     },
