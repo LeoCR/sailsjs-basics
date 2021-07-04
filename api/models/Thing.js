@@ -27,6 +27,11 @@ module.exports = {
       required:true,
       description:'The MIME type for the uploaded image.'
     },
+    expectedReturnAt:{
+      type:'number',
+      description:'A JS timestamp representing the moment of this item\'s expected return.',
+      example:15023892893
+    },
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
@@ -35,6 +40,10 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    borrowedBy:{
+      model:'User',
+      description:'The id of the user who is currently borrowing this item, or null if it\'s not currently being borrowed.'
+    },
     owner:{
       model:'User',
       required:true
