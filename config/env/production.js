@@ -364,7 +364,50 @@ module.exports = {
   // ssl: undefined,
 
 
+  /**************************************************************************
+  *                                                                         *
+  * Tell Sails how it should upload files in production.                    *
+  *                                                                         *
+  * (https://sailsjs.com/config/uploads)                                    *
+  *                                                                         *
+  **************************************************************************/
+  uploads: {
 
+    /***************************************************************************
+    *                                                                          *
+    * Configure a production filesystem adapter:                               *
+    *                                                                          *
+    * 1. Choose an adapter:                                                    *
+    *    https://sailsjs.com/plugins/uploads                                   *
+    *                                                                          *
+    * 2. Install it as a dependency of your Sails app.                         *
+    *    (For example:  npm install skipper-s3 --save)                         *
+    *                                                                          *
+    * 3. Then pass it in, with any other config.                               *
+    *    (See https://sailsjs.com/config/uploads for help.)                    *
+    *                                                                          *
+    ***************************************************************************/
+    adapter: require('skipper-s3'),
+    // key: 'fake-aws-keyagsd8agsdagsdhagsd',
+    // secret: 'fake-aws-secretasdg8asgd8gsd8asgd8',
+    // bucket: 'uploaded_photos_of_things_prod',
+    // region: 'us-east-1',
+    //--------------------------------------------------------------------------
+    //  /\   To avoid checking them in to version control, you might opt to set
+    //  ||   sensitive credentials like `s3Secret` using an environment variable.
+    //
+    //  For example:
+    //  ```
+    //  sails_uploads__key=AB2g1939eaGAdeAdamdaio38103onaDs
+    //  ```
+    //
+    //  To additionally allow file uploads to be viewed by the public, add:
+    //  ```
+    //  headers: { 'x-amz-acl': 'public-read' }
+    //  ```
+    //--------------------------------------------------------------------------
+
+  },
   /**************************************************************************
   *                                                                         *
   * Production overrides for any custom settings specific to your app.      *
