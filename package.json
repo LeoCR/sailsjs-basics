@@ -16,7 +16,7 @@
     "sails-hook-sockets": "^2.0.0",
     "sails-hook-uploads": "^0.4.3",
     "sails-mysql": "^1.0.1",
-    "skipper-s3": "^0.6.0"
+    "skipper-s3": "^0.6.0-7"
   },
   "devDependencies": {
     "eslint": "5.16.0",
