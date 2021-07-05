@@ -88,8 +88,8 @@ module.exports.custom = {
   * (https://dashboard.stripe.com/account/apikeys)                          *
   *                                                                         *
   **************************************************************************/
-  stripePublishableKey: 'pk_test_51GuRMzBFB1wAXmOROF7wKwdsyOUqNcpQE9VCjQQC7UwFZdfgvb0rbtajkJltHYOcYsfXDnJAFmZyLx0YMIpL811e00BIWKbHuG',
-  stripeSecret: 'sk_test_51GuRMzBFB1wAXmOR8QthBEOLkp0swLBaQ925LmnBTgMhQXd4eotyd27Z2QliWjvBc38FIXx4bErAQBlKF1NLJLn000jn98n2T4',
+  //stripePublishableKey: '',
+  //stripeSecret: '',
   //--------------------------------------------------------------------------
   // /\  Configure these to enable support for billing features.
   // ||  (Or if you don't need billing, feel free to remove them.)
@@ -102,5 +102,5 @@ module.exports.custom = {
   ***************************************************************************/
   // …
 
-  sendgridSecret:'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'
+  //sendgridSecret:''
 };
