@@ -251,7 +251,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'https://sailsjs-upload-images.herokuapp.com/',
+      'https://sailsjs-upload-images.herokuapp.com',
     //   'https://staging.example.com',
     ],
 
