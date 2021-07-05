@@ -47,7 +47,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     default: {
-      // adapter: 'sails-mysql',
+      adapter: 'sails-mysql',
       // url: 'mysql://user:password@host:port/database',
       //--------------------------------------------------------------------------
       //  /\   To avoid checking it in to version control, you might opt to set
@@ -184,7 +184,7 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
-    // adapter: '@sailshq/connect-redis',
+    adapter: '@sailshq/connect-redis',
     // url: 'redis://user:password@localhost:6379/databasenumber',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
@@ -221,7 +221,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cookie: {
-      // secure: true,
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,  // 24 hours
     },
 
@@ -250,10 +250,10 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     ***************************************************************************/
-    // onlyAllowOrigins: [
-    //   'https://example.com',
+    onlyAllowOrigins: [
+      'https://sailsjs-upload-images.herokuapp.com',
     //   'https://staging.example.com',
-    // ],
+    ],
 
 
     /***************************************************************************
@@ -268,7 +268,7 @@ module.exports = {
     * (https://sailsjs.com/docs/concepts/deployment/scaling)                   *
     *                                                                          *
     ***************************************************************************/
-    // adapter: '@sailshq/socket.io-redis',
+    adapter: '@sailshq/socket.io-redis',
     // url: 'redis://user:password@bigsquid.redistogo.com:9562/databasenumber',
     //--------------------------------------------------------------------------
     // /\   OR, to avoid checking it in to version control, you might opt to
@@ -325,7 +325,7 @@ module.exports = {
     * (https://sailsjs.com/config/http)                                        *
     *                                                                          *
     ***************************************************************************/
-    // trustProxy: true,
+    trustProxy: true,
 
   },
 
@@ -340,7 +340,7 @@ module.exports = {
   * this, just try deploying without setting it and see if it works.)       *
   *                                                                         *
   ***************************************************************************/
-  // port: 80,
+  port: 80,
 
 
 
@@ -364,7 +364,50 @@ module.exports = {
   // ssl: undefined,
 
 
+  /**************************************************************************
+  *                                                                         *
+  * Tell Sails how it should upload files in production.                    *
+  *                                                                         *
+  * (https://sailsjs.com/config/uploads)                                    *
+  *                                                                         *
+  **************************************************************************/
+  uploads: {
 
+    /***************************************************************************
+    *                                                                          *
+    * Configure a production filesystem adapter:                               *
+    *                                                                          *
+    * 1. Choose an adapter:                                                    *
+    *    https://sailsjs.com/plugins/uploads                                   *
+    *                                                                          *
+    * 2. Install it as a dependency of your Sails app.                         *
+    *    (For example:  npm install skipper-s3 --save)                         *
+    *                                                                          *
+    * 3. Then pass it in, with any other config.                               *
+    *    (See https://sailsjs.com/config/uploads for help.)                    *
+    *                                                                          *
+    ***************************************************************************/
+    adapter: require('skipper-s3'),
+    // key: 'fake-aws-keyagsd8agsdagsdhagsd',
+    // secret: 'fake-aws-secretasdg8asgd8gsd8asgd8',
+    // bucket: 'uploaded_photos_of_things_prod',
+    // region: 'us-east-1',
+    //--------------------------------------------------------------------------
+    //  /\   To avoid checking them in to version control, you might opt to set
+    //  ||   sensitive credentials like `s3Secret` using an environment variable.
+    //
+    //  For example:
+    //  ```
+    //  sails_uploads__key=AB2g1939eaGAdeAdamdaio38103onaDs
+    //  ```
+    //
+    //  To additionally allow file uploads to be viewed by the public, add:
+    //  ```
+    //  headers: { 'x-amz-acl': 'public-read' }
+    //  ```
+    //--------------------------------------------------------------------------
+
+  },
   /**************************************************************************
   *                                                                         *
   * Production overrides for any custom settings specific to your app.      *
@@ -374,8 +417,8 @@ module.exports = {
   *                                                                         *
   ***************************************************************************/
   custom: {
-    baseUrl: 'https://example.com',
-    internalEmailAddress: 'support@example.com',
+    baseUrl: 'https://sailsjs-upload-images.herokuapp.com',
+    internalEmailAddress: 'laranibarsanchez@gmail.com',
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
     // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',

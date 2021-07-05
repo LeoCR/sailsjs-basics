@@ -41,6 +41,7 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
 
     onlyAllowOrigins: [
       'http://localhost:1337',
+      'https://sailsjs-upload-images.herokuapp.com'
       // 'https://example-staging.herokuapp.com',
       // 'http://example-staging.herokuapp.com',
       // 'https://staging.example.com',
@@ -71,7 +72,7 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
 
   custom: Object.assign({}, PRODUCTION_CONFIG.custom, {
 
-    baseUrl: 'https://staging.example.com',
+    baseUrl: 'https://sailsjs-upload-images.herokuapp.com',
     //--------------------------------------------------------------------------
     // /\  Hard-code the base URL where your staging environment is hosted.
     // ||  (or use system env var: `sails_custom__baseUrl`)
@@ -91,6 +92,9 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
     // ||  (or use system environment variables prefixed with "sails_custom__")
     //--------------------------------------------------------------------------
 
-  })
-
+  }),
+  cookie: {
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,  // 24 hours
+  },
 });
