@@ -92,6 +92,9 @@ module.exports = Object.assign({}, PRODUCTION_CONFIG, {
     // ||  (or use system environment variables prefixed with "sails_custom__")
     //--------------------------------------------------------------------------
 
-  })
-
+  }),
+  cookie: {
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,  // 24 hours
+  },
 });
